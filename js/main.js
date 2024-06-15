@@ -81,9 +81,9 @@ if(nombreUsuario.toUpperCase() === "ESC")break;
             if (pack == 1) {
                 textoPack = "Pantalon y remera (1200$) " + " X " + cantidad + " Unidades";
             } else  if (pack == 2) {
-                textoPack = "Pantalon y Campera";
+                textoPack = "Pantalon y Campera (2000$) " + " X " + cantidad + " Unidades";";
             } else if (pack == 3) {
-                textoPack = "Pantalon Remera y Campera";
+                textoPack = "Pantalon Remera y Campera (2800$) " + " X " + cantidad + " Unidades";";
             }
            alert ("Usuario: " + nombre + "\nPack: " + textoPack + "\nPrecio sin descuento: " + montoSinD + "\nPrecio con descuento: " + montoConD + "\nCuota a pagar: " + precio)       
         }
