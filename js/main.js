@@ -3,10 +3,11 @@ let nombreUsuario = prompt("Ingrese su nombre completo: (ESC para salir)");
 if(nombreUsuario.toUpperCase() === "ESC")break;
 
 
-    let textoPackProducto = "Elija el pack del producto que desea comprar:\n\n"
-    textoPackProducto += "1 - Pantalon y Remera (1.200$)\n";
-    textoPackProducto += "2 - Pantalon y Campera (2.000$)\n";
-    textoPackProducto += "3 - Pantalon Remera y Campera (2.800$)\n";
+let textoPackProducto1 = "1 - Pantalon y Remera (1.200$)\n";
+let textoPackProducto2 = "2 - Pantalon y Campera (2.000$)\n";
+let textoPackProducto3 = "3 - Pantalon Remera y Campera (2.800$)\n";
+let textoPackProducto = `Elija el pack del producto que desea comprar:\n\n ${textoPackProducto1} ${textoPackProducto2} ${textoPackProducto3}`;
+
     let packElecto = parseInt(prompt(textoPackProducto));
     let textoCantidad = ("Seleccione la cantidad que desea llevar del producto:\n\n");
     textoCantidad += "Llevando 10 o mas te descontamos el 10%\n";
@@ -50,20 +51,20 @@ if(nombreUsuario.toUpperCase() === "ESC")break;
     }
     
 
-    
     let precioConCuotas = 0;
+    let precioFinal = 0;
     
     if (cuotas == 1){
-        precioConCuotas = montoConDescuento / 3;
+        precioConCuotas = (montoConDescuento / 3).toFixed(2);
         precioFinal = precioConCuotas + "$ (3 Meses)";
     } else if (cuotas == 2){
-        precioConCuotas = montoConDescuento / 6;
+        precioConCuotas = (montoConDescuento / 6).toFixed(2);
         precioFinal = precioConCuotas + "$ (6 Meses)";
     } else if (cuotas == 3){
-        precioConCuotas = montoConDescuento / 9;
+        precioConCuotas = (montoConDescuento / 9).toFixed(2);
         precioFinal = precioConCuotas + "$ (9 Meses)";
     } else if (cuotas == 4){
-        precioConCuotas = montoConDescuento / 12;
+        precioConCuotas = (montoConDescuento / 12).toFixed(2);
         precioFinal = precioConCuotas + "$ (12 Meses)";
     }
     
@@ -81,9 +82,9 @@ if(nombreUsuario.toUpperCase() === "ESC")break;
             if (pack == 1) {
                 textoPack = "Pantalon y remera (1200$) " + " X " + cantidad + " Unidades";
             } else  if (pack == 2) {
-                textoPack = "Pantalon y Campera (2000$) " + " X " + cantidad + " Unidades";";
+                textoPack = "Pantalon y Campera (2000$) " + " X " + cantidad + " Unidades";
             } else if (pack == 3) {
-                textoPack = "Pantalon Remera y Campera (2800$) " + " X " + cantidad + " Unidades";";
+                textoPack = "Pantalon Remera y Campera (2800$) " + " X " + cantidad + " Unidades";
             }
            alert ("Usuario: " + nombre + "\nPack: " + textoPack + "\nPrecio sin descuento: " + montoSinD + "\nPrecio con descuento: " + montoConD + "\nCuota a pagar: " + precio)       
         }
