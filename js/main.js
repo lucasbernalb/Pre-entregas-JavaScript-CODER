@@ -40,6 +40,11 @@ class PacksProductos {
     return descuento;
   }
 
+  pagarEnCuotas (meses) {
+    let cuotas = this.descuentito() / meses;
+    return cuotas;
+  }
+
   listaFinal() {
     let salida =
     `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal} y un descuento de $${this.descuentito.plataDescontada}`;
@@ -59,3 +64,5 @@ console.log(packElecto.precio);
 console.log(catalogo.descuentito(cantidadProducto, packElecto.precio));
 let Preciofinal = catalogo.descuentito(cantidadProducto, packElecto.precio);
 catalogo.listaFinal();
+console.log(catalogo.pagarEnCuotas(4));
+
