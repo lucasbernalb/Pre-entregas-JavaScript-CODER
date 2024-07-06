@@ -1,90 +1,61 @@
-while (true){
-let nombreUsuario = prompt("Ingrese su nombre completo: (ESC para salir)");
-if(nombreUsuario.toUpperCase() === "ESC")break;
+const packProducto$ = [
+  {id:1, nombre:"Pantalon y Remera", precio:1200},
+  {id:2, nombre:"Pantalon y Campera", precio:2000},
+  {id:3, nombre:"Equipo de Fútbol", precio:2500},
+  ]
 
+class PacksProductos {
+  constructor(productos) {
+    this.items = productos;
+  }
 
-let textoPackProducto1 = "1 - Pantalon y Remera (1.200$)\n";
-let textoPackProducto2 = "2 - Pantalon y Campera (2.000$)\n";
-let textoPackProducto3 = "3 - Pantalon Remera y Campera (2.800$)\n";
-let textoPackProducto = `Elija el pack del producto que desea comprar:\n\n ${textoPackProducto1} ${textoPackProducto2} ${textoPackProducto3}`;
+  buscarProdcto(id) {
+    return this.items.find(productoPack => productoPack.id == id );
+  }
 
-    let packElecto = parseInt(prompt(textoPackProducto));
-    let textoCantidad = ("Seleccione la cantidad que desea llevar del producto:\n\n");
-    textoCantidad += "Llevando 10 o mas te descontamos el 10%\n";
-    textoCantidad += "Llevando 20 o mas te descontamos el 20%\n";
-    textoCantidad += "Llevando 30 o mas te descontamos el 30%\n";
-    let cantidad = parseInt(prompt(textoCantidad));
-    let textoCuotas = "¿En cuantas cuotas desea pagar?\n\n";
-    textoCuotas += "1 - 3 Cuotas\n";
-    textoCuotas += "2 - 6 Cuotas\n";
-    textoCuotas += "3 - 9 Cuotas\n";
-    textoCuotas += "4 - 12 Cuotas\n";
-    let cuotas = parseInt(prompt(textoCuotas));
-    
-    let precioPack = 0;
-    
-    if (packElecto == 1) {
-         precioPack = 1200;   
-    } else if (packElecto == 2) {
-          precioPack = 2000;   
-    } else if (packElecto == 3) {
-          precioPack = 2800; 
+  obtenerProducto() {
+    return this.items;
+  }
+
+  totalProductos() {
+    return this.items.length;
+  }
+
+  descuentito(cantidad, precio) {
+    if (cantidad >= 10) {
+      this.descuent = (precio * cantidad) * 0.9;
     }
-    
-     let montoSinDescuento = calcularMontoSin(precioPack, cantidad);
-     console.log("Precio sin descuento: " + montoSinDescuento);
-     let montoConDescuento = 0;
-     
-     if (cantidad >= 10){
-         montoConDescuento = montoSinDescuento * 0.9;
-    } else if (cantidad >= 20){
-        montoConDescuento = montoSinDescuento * 0.8;
-        } else if (cantidad >= 10){
-        montoConDescuento = montoSinDescuento * 0.7;
-        }
-        else {
-            montoConDescuento = montoSinDescuento ;
-        }
+    else if (cantidad >= 20) {
+      this.descuent = (precio * cantidad) * 0.8;
+    }
+    else if (cantidad >= 30) {
+      this.descuent = (precio * cantidad) * 0.7;
+    }
+    else {
+      this.descuent = precio * cantidad;
+    }
+    let plataDescontada = this.descuent - (precio * cantidad);
+    console.log(plataDescontada);
+    let descuento = this.descuent;
+    return descuento;
+  }
 
-    function calcularMontoSin(precioPack, cantidad){
-        return precioPack * cantidad
-    }
-    
+  listaFinal() {
+    let salida =
+    `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal} y un descuento de $${this.descuentito.plataDescontada}`;
+    alert (salida);
+  }
+}  
 
-    let precioConCuotas = 0;
-    let precioFinal = 0;
-    
-    if (cuotas == 1){
-        precioConCuotas = (montoConDescuento / 3).toFixed(2);
-        precioFinal = precioConCuotas + "$ (3 Meses)";
-    } else if (cuotas == 2){
-        precioConCuotas = (montoConDescuento / 6).toFixed(2);
-        precioFinal = precioConCuotas + "$ (6 Meses)";
-    } else if (cuotas == 3){
-        precioConCuotas = (montoConDescuento / 9).toFixed(2);
-        precioFinal = precioConCuotas + "$ (9 Meses)";
-    } else if (cuotas == 4){
-        precioConCuotas = (montoConDescuento / 12).toFixed(2);
-        precioFinal = precioConCuotas + "$ (12 Meses)";
-    }
-    
-    console.log("Precio con descuento " + montoConDescuento);
-    console.log("Precio final a pagar " + precioConCuotas);
-    
-    InformacionDeLaCompra(nombreUsuario, packElecto, cantidad, montoSinDescuento, montoConDescuento, precioFinal)
-     nombreUsuario = prompt("Ingrese otro nombre completo: (ESC para salir)");
-     if(nombreUsuario.toUpperCase() === "ESC")break;
-    }
-     
-        function InformacionDeLaCompra(nombre, pack, cantidad,  montoSinD, montoConD, precio){
-            let textoPack;
-        
-            if (pack == 1) {
-                textoPack = "Pantalon y remera (1200$) " + " X " + cantidad + " Unidades";
-            } else  if (pack == 2) {
-                textoPack = "Pantalon y Campera (2000$) " + " X " + cantidad + " Unidades";
-            } else if (pack == 3) {
-                textoPack = "Pantalon Remera y Campera (2800$) " + " X " + cantidad + " Unidades";
-            }
-           alert ("Usuario: " + nombre + "\nPack: " + textoPack + "\nPrecio sin descuento: " + montoSinD + "\nPrecio con descuento: " + montoConD + "\nCuota a pagar: " + precio)       
-        }
+const catalogo = new PacksProductos(packProducto$);
+console.log(catalogo.obtenerProducto());
+
+let electo = prompt("Elige un pack:\n1 - (Pantalon y Remera $1200)\n2 - (Pantalon y Campera $2000)\n3 - (Equipo de Fútbol $2500)");
+let cantidadProducto = prompt("Ingrese la cantidad que quiere llevar de este producto:");
+
+let packElecto = catalogo.buscarProdcto(electo);
+console.log(packElecto.precio);
+
+console.log(catalogo.descuentito(cantidadProducto, packElecto.precio));
+let Preciofinal = catalogo.descuentito(cantidadProducto, packElecto.precio);
+catalogo.listaFinal();
