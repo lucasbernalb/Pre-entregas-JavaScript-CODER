@@ -47,7 +47,7 @@ class PacksProductos {
 
   listaFinal() {
     let salida =
-    `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal}`.;
+    `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal}.`;
     alert (salida);
   }
 }  
