@@ -35,7 +35,7 @@ class PacksProductos {
       this.descuent = precio * cantidad;
     }
     let plataDescontada = this.descuent - (precio * cantidad);
-    console.log(plataDescontada);
+    console.log("Plata descontada: " + plataDescontada);
     let descuento = this.descuent;
     return descuento;
   }
@@ -47,7 +47,7 @@ class PacksProductos {
 
   listaFinal() {
     let salida =
-    `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal} y un descuento de $${this.descuentito.plataDescontada}`;
+    `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal}`.;
     alert (salida);
   }
 }  
@@ -59,9 +59,9 @@ let electo = prompt("Elige un pack:\n1 - (Pantalon y Remera $1200)\n2 - (Pantalo
 let cantidadProducto = prompt("Ingrese la cantidad que quiere llevar de este producto:");
 
 let packElecto = catalogo.buscarProdcto(electo);
-console.log(packElecto.precio);
+console.log("Precio del producto: " + packElecto.precio + ` X ${cantidadProducto}`);
 
-console.log(catalogo.descuentito(cantidadProducto, packElecto.precio));
+console.log("Monto final: "+ catalogo.descuentito(cantidadProducto, packElecto.precio));
 let Preciofinal = catalogo.descuentito(cantidadProducto, packElecto.precio);
 catalogo.listaFinal();
 console.log(catalogo.pagarEnCuotas(4));
