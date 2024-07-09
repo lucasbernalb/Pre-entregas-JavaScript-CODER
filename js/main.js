@@ -34,35 +34,60 @@ class PacksProductos {
     else {
       this.descuent = precio * cantidad;
     }
-    let plataDescontada = this.descuent - (precio * cantidad);
-    console.log("Plata descontada: " + plataDescontada);
+    this.plataDescontada = this.descuent - (precio * cantidad);
+    console.log("Plata descontada: " + this.plataDescontada);
     let descuento = this.descuent;
     return descuento;
   }
 
-  pagarEnCuotas (meses) {
-    let cuotas = this.descuentito() / meses;
-    return cuotas;
+  infoCuotas (validacion) {
+    if (validacion === "SI".toUpperCase()){
+      this.info = prompt("Escriba en cuantos meses desea pagar:")
+      
+    }
+    else if (validacion === "NO".toUpperCase()){
+      this.info = 0; 
+    }
+    else {
+      alert("No a escrito correctamente");
+    }
+    console.log(`Cuotas a pagar ${this.info}`)
+  }
+  
+  pagarEnCuotas () {
+    let cuotasFinal = this.descuent / this.info; 
+    this.cuotas123 = cuotasFinal.toFixed(2);
+    return cuotasFinal;
   }
 
   listaFinal() {
     let salida =
-    `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal}.`;
+    `Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u") por el precio de $${Preciofinal}, ya con un descuento de $${this.plataDescontada}.`;
     alert (salida);
+  }
+
+  listaFinalCuotas () {
+    let salida2 = (`Usted lleva la cantidad de ${cantidadProducto} productos del pack (${packElecto.nombre} $${packElecto.precio} "c/u"). El monto final a pagar es: $${Preciofinal} en un total de ${this.info} cuotas ($${this.pagarEnCuotas()} cada cuota).`);
+    alert(salida2);
   }
 }  
 
-const catalogo = new PacksProductos(packProducto$);
-console.log(catalogo.obtenerProducto());
+const todosLosProductos = new PacksProductos(packProducto$);
+console.log(todosLosProductos.obtenerProducto());
 
-let electo = prompt("Elige un pack:\n1 - (Pantalon y Remera $1200)\n2 - (Pantalon y Campera $2000)\n3 - (Equipo de Fútbol $2500)");
-let cantidadProducto = prompt("Ingrese la cantidad que quiere llevar de este producto:");
+let electo = prompt("Elige un pack:\n\n1 - Pantalon y Remera $1200\n2 - Pantalon y Campera $2000\n3 - Equipo de Fútbol $2500");
+let cantidadProducto = prompt("Ingrese la cantidad que quiere llevar de este producto:\n\nLlevando más de 10 tendra un 10% OFF\nLlevando más de 20 tendra un 20% OFF\nLlevando más de 30 tendra un 30% OFF");
 
-let packElecto = catalogo.buscarProdcto(electo);
+let packElecto = todosLosProductos.buscarProdcto(electo);
+console.log(todosLosProductos.buscarProdcto(1));
 console.log("Precio del producto: " + packElecto.precio + ` X ${cantidadProducto}`);
 
-console.log("Monto final: "+ catalogo.descuentito(cantidadProducto, packElecto.precio));
-let Preciofinal = catalogo.descuentito(cantidadProducto, packElecto.precio);
-catalogo.listaFinal();
-console.log(catalogo.pagarEnCuotas(4));
+console.log("Monto final: "+ todosLosProductos.descuentito(cantidadProducto, packElecto.precio));
+let Preciofinal = todosLosProductos.descuentito(cantidadProducto, packElecto.precio);
+todosLosProductos.listaFinal();
+let pagarEnCuotas1 = prompt(`¿Desea pagar en cuotas? Escriba "si" o "no".`).toUpperCase();
+let decisionCuotas = todosLosProductos.infoCuotas(pagarEnCuotas1);
+todosLosProductos.listaFinalCuotas();
+alert(`Gracias por su compra:))))`);
+
 
