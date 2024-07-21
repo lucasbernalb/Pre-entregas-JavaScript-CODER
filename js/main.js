@@ -128,6 +128,7 @@ function agregarProductos(id) {
     carrito.push(producto);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     console.log("El producto se ha agregado correctamente!");
+
 }
 
 
