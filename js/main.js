@@ -115,5 +115,5 @@ function renderProductos() {
     document.getElementById("productos").innerHTML = contenidoHTML;
 }
 
-renderProductos();
+renderProductos(productos);
 renderBotonCarrito();

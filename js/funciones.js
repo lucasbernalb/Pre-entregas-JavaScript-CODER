@@ -29,7 +29,9 @@ function renderProductos(productos) {
 
 function agregarProductos(id) {
     const producto = productos.find(item => item.id == id);
+    
     const carrito = cargarCarritoLocalS();
+    
     carrito.push(producto);
     guardarCarritoLS(carrito);
     renderBotonCarrito();
@@ -48,6 +50,7 @@ function eliminarCarritoLS(id) {
     guardarCarritoLS(carritoActualizado);
     renderCarrito();
     renderBotonCarrito();
+    sumarProductosCarrito();git 
     console.log("El producto #" + id + " ha sido removido correctamente"); 
 }
 
@@ -82,9 +85,29 @@ function cargarProductoLS() {
 
 function sumarProductosCarrito() {
         let precio = JSON.parse(localStorage.getItem("carrito"));
-        const productoPrecio = productos.reduce(item => item.precio == precio);
-        document.getElementById("totalPagar").innerHTML = productoPrecio;
-        
+        const productoPrecio = precio.map(item => item.precio);
+        let productoPrecioF = 0;
+        productoPrecioF = productoPrecio.reduce((acumulador, numero) => acumulador + numero, 0);
+        console.log(productoPrecioF);
+        document.getElementById("totalPagar").innerHTML = "$" + productoPrecioF;
+        renderCarrito();
+
+        return productoPrecioF;
+}
+
+function descuentoProductosCarrito() {
+    let precioFinal = sumarProductosCarrito();
+    if(precioFinal > 5000){
+       descuentoFinal = precioFinal * 0.9;   
+    } else if (precioFinal > 10000){
+         descuentoFinal = precioFinal * 0.8; 
+    } else if (precioFinal > 15000){
+        descuentoFinal = precioFinal * 0.7; 
+    } else if (precioFinal > 20000){
+        descuentoFinal = precioFinal * 0.6;   
+    }
+    document.getElementById("descuentoFinal").innerHTML = "$" + descuentoFinal;
+    console.log(descuentoFinal);
 }
 
 function guardarProductoLS(id) {
