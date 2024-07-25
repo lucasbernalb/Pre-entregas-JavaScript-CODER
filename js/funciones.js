@@ -106,12 +106,12 @@ function sumarProductosCarrito() {
         console.log(productoPrecioF);
         document.getElementById("totalPagar").innerHTML = "$" + productoPrecioF;
         renderCarrito();
-
         return productoPrecioF;
 }
 
 function descuentoProductosCarrito() {
     let precioFinal = sumarProductosCarrito();
+    let descuentoFinal = 0;
     if(precioFinal > 5000){
        descuentoFinal = precioFinal * 0.9;   
     } else if (precioFinal > 10000){
