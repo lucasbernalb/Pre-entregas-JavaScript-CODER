@@ -65,6 +65,7 @@ function eliminarCarritoLS(id) {
     renderCarrito();
     renderBotonCarrito();
     sumarProductosCarrito();
+    descuentoProductosCarrito();
     console.log("El producto #" + id + " ha sido removido correctamente"); 
 }
 
@@ -104,24 +105,25 @@ function sumarProductosCarrito() {
         let productoPrecioF = 0;
         productoPrecioF = productoPrecio.reduce((acumulador, numero) => acumulador + numero, 0);
         console.log(productoPrecioF);
-        document.getElementById("totalPagar").innerHTML = "$" + productoPrecioF;
-        renderCarrito();
+        document.getElementById("totalPagar").innerHTML = "$" + productoPrecioF;     
         return productoPrecioF;
 }
 
 function descuentoProductosCarrito() {
     let precioFinal = sumarProductosCarrito();
     let descuentoFinal = 0;
-    if(precioFinal > 5000){
-       descuentoFinal = precioFinal * 0.9;   
-    } else if (precioFinal > 10000){
-         descuentoFinal = precioFinal * 0.8; 
-    } else if (precioFinal > 15000){
-        descuentoFinal = precioFinal * 0.7; 
-    } else if (precioFinal > 20000){
-        descuentoFinal = precioFinal * 0.6;   
+    let descuentoOff = 0;
+    if(precioFinal <= 5000){
+       descuentoFinal = precioFinal * (descuentoOff = 0.10);   
+    } else if (precioFinal <= 10000){
+         descuentoFinal = precioFinal * (descuentoOff = 0.12); 
+    } else if (precioFinal <= 15000){
+        descuentoFinal = precioFinal * (descuentoOff = 0.15); 
+    } else if (precioFinal >= 20000){
+        descuentoFinal = precioFinal * (descuentoOff = 0.18);   
     }
-    document.getElementById("descuentoFinal").innerHTML = "$" + descuentoFinal;
+    document.getElementById("descuentoFinal").innerHTML = "-" + descuentoFinal;
+    document.getElementById("precioFinal").innerHTML = "$" + (precioFinal - descuentoFinal);
     console.log(descuentoFinal);
 }
 
@@ -129,4 +131,4 @@ function guardarProductoLS(id) {
     localStorage.setItem("producto", JSON.stringify(id));
 }
 
-console.log(sumarProductosCarrito());
+

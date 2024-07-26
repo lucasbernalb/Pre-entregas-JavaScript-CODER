@@ -31,12 +31,13 @@ function renderCarrito() {
             
         </div>`;
     }
-
-
-
+    
+    
+    
 
     document.getElementById("productos").innerHTML = contenidoHTML;
 }
 
 renderCarrito();
 renderBotonCarrito();
+descuentoProductosCarrito();
